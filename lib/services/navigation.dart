@@ -32,10 +32,10 @@ class NavigationHelper{
     switch(settings.name)
     {
       case '/usersignin':return MaterialPageRoute(builder: (_) => AuthenticateScreen());
-      case '/getlocation':return MaterialPageRoute(builder: (_)=>GetLocationPage());
-      case '/signin':return MaterialPageRoute(builder: (_)=>SigninPage());
-      case '/siginphone':return MaterialPageRoute(builder: (_)=>SigninPhonePage());
-      case '/homescreen':return MaterialPageRoute(builder: (_)=>HomePageScreen());
+      case '/getlocation':return MaterialPageRoute(builder: (_) => GetLocationPage());
+      case '/signin':return MaterialPageRoute(builder: (_) => SigninPage());
+      case '/siginphone':return MaterialPageRoute(builder: (_) => SigninPhonePage());
+      case '/homescreen':return MaterialPageRoute(builder: (_) => HomePageScreen());
       case '/fashionmain':return MaterialPageRoute(builder: (_)=>FashionMainPage());
       case '/womenfashion':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
       case '/womenfashiondetail':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());

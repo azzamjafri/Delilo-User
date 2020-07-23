@@ -27,12 +27,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   onTap: (){
                     Scaffold.of(context).openDrawer();
                   },
-                  child: Image.asset('assets/images/u.png'),
+                  child: Image.asset('assets/u.png'),
                 );
               }
-          ),//GestureDetector(child: Image.asset('assets/images/u.png'),onTap: (){Scaffold.of(context).openDrawer();},),
+          ),//GestureDetector(child: Image.asset('assets/u.png'),onTap: (){Scaffold.of(context).openDrawer();},),
           centerTitle: true,
-          title: Container(height:100,width: 140,child: Image.asset('assets/images/dellologo.png')),
+          title: Container(height:100,width: 140,child: Image.asset('assets/dellologo.png')),
           backgroundColor: Colors.white,
           actions: [
             Padding(
@@ -92,7 +92,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           image: DecorationImage(image: AssetImage())
                         ),*/
                         child: Center(
-                          child: Image.asset('assets/images/supersale.png'),
+                          child: Image.asset('assets/supersale.png'),
                         ),
                       ),
                     ),
@@ -113,7 +113,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Image.asset(
-                        "assets/images/Union1.png",
+                        "assets/Union 1.png",
 
                         //color: Colors.black87,
                       ),
@@ -170,7 +170,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Image.asset(
-                        "assets/images/Union1.png",
+                        "assets/Union 1.png",
 
                       ),
                       Column(
@@ -226,7 +226,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Image.asset(
-                        "assets/images/Union1.png",
+                        "assets/Union 1.png",
                         width: width * .09,
                         height: width * .09,
                         color: Colors.black87,

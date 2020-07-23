@@ -11,6 +11,7 @@ class AuthenticateScreen extends StatefulWidget {
 }
 
 FirebaseUser user;
+
 class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
 
@@ -274,13 +275,29 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                         ),
                         child: Align(alignment: Alignment(0.3,-.15),child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 15),)),
                       ),
-                      Container(
-                        width: 150,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage('assets/p.png'),fit: BoxFit.fitHeight),
+                      GestureDetector(
+                        onTap: () async {
+                          user = await AuthService().signInWithGoogle();
+                          print(user.uid + ' THIS IS THE UID OF CURRENT USER\n\n\n');
+                          await Firestore.instance
+                            .collection('users')
+                            .document(user.uid)
+                            .setData({
+                              "email": user.email,
+                              "phone": user.phoneNumber,
+                              "username": user.displayName,
+                              // 'password': '',
+                        });
+                          Navigator.pushNamedAndRemoveUntil(context, '/getlocation', (route) => false);
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage('assets/p.png'),fit: BoxFit.fitHeight),
+                          ),
+                          child: Align(alignment: Alignment(0.3,-.15),child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 15),)),
                         ),
-                        child: Align(alignment: Alignment(0.3,-.15),child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 15),)),
                       ),
                     ],
                   ),

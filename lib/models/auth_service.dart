@@ -1,12 +1,15 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 
 
 
 
 class AuthService {
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   // handleAuth() {
   //   return StreamBuilder(
@@ -22,6 +25,29 @@ class AuthService {
   //   );
   // }
 
+
+  // Google OAuth
+  signInWithGoogle() async {
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken);
+
+    final AuthResult authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+    final FirebaseUser user = authResult.user;
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+    assert(user.uid == currentUser.uid);
+    return currentUser;
+  }
+
+  // Google OAuth signout
+  signOutGoogle() async {
+    await googleSignIn.signOut();
+    print('user sign out');
+  }
 
   // signIn
   signIn(AuthCredential credential) {

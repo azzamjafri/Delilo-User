@@ -32,7 +32,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                               onTap: (){
                                 Scaffold.of(context).openDrawer();
                               },
-                              child: Image.asset('assets/images/u.png'),
+                              child: Image.asset('assets/u.png'),
                             );
                           }
                       ),
@@ -82,7 +82,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             child: Container(
                               decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/images/Union1.png'),fit: BoxFit.fitHeight,
+                                  image: DecorationImage(image: AssetImage('assets/Union1.png'),fit: BoxFit.fitHeight,
                                     alignment: Alignment.topCenter,)
                               ),
                               /* decoration: BoxDecoration(
@@ -113,7 +113,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage('assets/images/u.png'),fit: BoxFit.fitHeight,
+                              image: DecorationImage(image: AssetImage('assets/u.png'),fit: BoxFit.fitHeight,
                                 alignment: Alignment.center,)
                           ),
                           /* decoration: BoxDecoration(
@@ -135,7 +135,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: Container(
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/images/u.png'),fit: BoxFit.fitHeight,
+                                image: DecorationImage(image: AssetImage('assets/u.png'),fit: BoxFit.fitHeight,
                                   alignment: Alignment.center,)
                             ),
                             /* decoration: BoxDecoration(
@@ -157,7 +157,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: Container(
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/images/u.png'),fit: BoxFit.fitHeight,
+                                image: DecorationImage(image: AssetImage('assets/u.png'),fit: BoxFit.fitHeight,
                                   alignment: Alignment.center,)
                             ),
                             /* decoration: BoxDecoration(
@@ -184,7 +184,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage('assets/images/Union1.png'),fit: BoxFit.fitHeight,
+                              image: DecorationImage(image: AssetImage('assets/Union1.png'),fit: BoxFit.fitHeight,
                                 alignment: Alignment.topCenter,)
                           ),
                           /* decoration: BoxDecoration(
@@ -199,7 +199,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage('assets/images/Union1.png'),fit: BoxFit.fitHeight,
+                              image: DecorationImage(image: AssetImage('assets/Union 1.png'),fit: BoxFit.fitHeight,
                                 alignment: Alignment.topCenter,)
                           ),
                           /* decoration: BoxDecoration(
@@ -236,7 +236,7 @@ child: FractionallySizedBox(alignment: Alignment.bottomCenter,heightFactor: .3,c
 decoration: BoxDecoration(
 image: DecorationImage(
 colorFilter: ColorFilter.mode(Colors.black87.withOpacity(.2), BlendMode.darken),
-image: AssetImage('assets/images/fashion1.jpg'),
+image: AssetImage('assets/fashion1.jpg'),
 
 fit: BoxFit.fitHeight,
 alignment: Alignment.topCenter,
