@@ -47,7 +47,9 @@ class MyDrawer extends StatelessWidget {
             )),
           ),
           GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/');},
+            onTap: (){
+              Navigator.pushNamed(context, '/');
+              },
             child: ListTile(
               onLongPress: null,
               title: Container(
@@ -75,7 +77,9 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/fashionmain');},
+            onTap: (){
+              Navigator.pushNamed(context, '/fashionmain');
+              },
             child: ListTile(
               onLongPress: null,
               title: Container(
@@ -355,7 +359,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/');},
+            onTap: (){Navigator.pushNamed(context, '/orders');},
             child: ListTile(
               onLongPress: null,
               title: Container(
@@ -383,7 +387,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/');},
+            onTap: (){Navigator.pushNamed(context, '/coupons');},
             child: ListTile(
               onLongPress: null,
               title: Container(
@@ -411,7 +415,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/');},
+            onTap: (){Navigator.pushNamed(context, '/sellersignin');},
             child: ListTile(
               onLongPress: null,
               title: Container(
@@ -438,7 +442,7 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           ),GestureDetector(
-            onTap: (){Navigator.pushNamed(context, '/');},
+            onTap: (){Navigator.pushNamed(context, '/customersupport');},
             child: ListTile(
               onLongPress: null,
               title: Container(

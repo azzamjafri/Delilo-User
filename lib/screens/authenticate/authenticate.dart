@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delilo/models/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
+
+
 
 class AuthenticateScreen extends StatefulWidget {
   @override
@@ -30,6 +33,13 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
   
   
+
+  bool _isLoggedIn = false;
+  Map userProfile;
+
+
+
+
   
 
 
@@ -216,7 +226,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                       onTap: () {
                         phoneController.text = phoneController.text.trim();
                     codeSent
-                        ? AuthService().signWithOTP(smsCode, verificationId)
+                        // ? AuthService().signWithOTP(smsCode, verificationId)
+                        ? print('verified')
                         : verifyPhone("+91" + phoneController.text);
 
                     if (verified) {
@@ -267,14 +278,23 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 150,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage('assets/j.png'),fit: BoxFit.fitHeight),
+
+                      // FB OAuth
+                      GestureDetector(
+                        onTap: () {
+                          AuthService().loginWithFB();
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage('assets/j.png'),fit: BoxFit.fitHeight),
+                          ),
+                          child: Align(alignment: Alignment(0.3,-.15),child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 15),)),
                         ),
-                        child: Align(alignment: Alignment(0.3,-.15),child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 15),)),
                       ),
+
+                      // Google OAuth
                       GestureDetector(
                         onTap: () async {
                           user = await AuthService().signInWithGoogle();
@@ -306,8 +326,22 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                     children: [
                       Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 40,width:wid*.5,
                       child: FlatButton(
-                        onPressed: (){
+                        onPressed: () async {
+
+                          user = await AuthService().signInWithEmail(emailController.text.trim(), passwordController.text.trim());
+
                           if (canRegister == true) {
+                            
+                            await Firestore.instance
+                            .collection('users')
+                            .document(user.uid)
+                            .setData({
+                              "email": emailController.text,
+                              "phone": phoneController.text,
+                              "username": userNameController.text,
+                              'password': passwordController.text,
+                            });
+                            
                             Navigator.pushNamed(context, '/getlocation');
                           }else{
                             key.currentState.showSnackBar(SnackBar(content: Text('Something went wrong !'),));
@@ -333,6 +367,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     );
   }
 
+
+  
     Future<void> verifyPhone(phoneNo) async {
     final PhoneVerificationCompleted verified =
         (AuthCredential authResult) async {
@@ -347,15 +383,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
         await FirebaseAuth.instance.currentUser().then((value) {
           user = value;
         });
-        await Firestore.instance
-            .collection('users')
-            .document(usser.user.uid)
-            .setData({
-              "email": emailController.text,
-              "phone": phoneController.text,
-              "username": userNameController.text,
-              'password': passwordController.text,
-         });
+        
       });
       setState(() async {
         this.verified = true;

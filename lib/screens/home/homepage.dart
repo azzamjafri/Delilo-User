@@ -1,6 +1,7 @@
 import 'package:delilo/screens/auxillary/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
+import 'package:flutter/services.dart';
 
 
 
@@ -93,6 +94,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ),*/
                         child: Center(
                           child: Image.asset('assets/supersale.png'),
+                          // child: rootBundle.loadString('assets/supersale.png'),
                         ),
                       ),
                     ),

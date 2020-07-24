@@ -82,7 +82,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             child: Container(
                               decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/Union1.png'),fit: BoxFit.fitHeight,
+                                  image: DecorationImage(image: AssetImage('assets/Union 1.png'),fit: BoxFit.fitHeight,
                                     alignment: Alignment.topCenter,)
                               ),
                               /* decoration: BoxDecoration(
@@ -184,7 +184,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage('assets/Union1.png'),fit: BoxFit.fitHeight,
+                              image: DecorationImage(image: AssetImage('assets/Union 1.png'),fit: BoxFit.fitHeight,
                                 alignment: Alignment.topCenter,)
                           ),
                           /* decoration: BoxDecoration(

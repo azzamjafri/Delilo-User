@@ -3,8 +3,10 @@ import 'package:delilo/screens/authenticate/authenticate.dart';
 import 'package:delilo/screens/authenticate/getlocation.dart';
 import 'package:delilo/screens/authenticate/signin.dart';
 import 'package:delilo/screens/authenticate/signinphone.dart';
+import 'package:delilo/screens/home/CustomerSupport/customer_support.dart';
 import 'package:delilo/screens/home/account.dart';
 import 'package:delilo/screens/home/cart.dart';
+import 'package:delilo/screens/home/coupons/coupons.dart';
 import 'package:delilo/screens/home/fashion/fashionmain.dart';
 import 'package:delilo/screens/home/fashion/kidsfashion.dart';
 import 'package:delilo/screens/home/fashion/mensfashion.dart';
@@ -36,7 +38,7 @@ class NavigationHelper{
       case '/signin':return MaterialPageRoute(builder: (_) => SigninPage());
       case '/siginphone':return MaterialPageRoute(builder: (_) => SigninPhonePage());
       case '/homescreen':return MaterialPageRoute(builder: (_) => HomePageScreen());
-      case '/fashionmain':return MaterialPageRoute(builder: (_)=>FashionMainPage());
+      case '/fashionmain':return MaterialPageRoute(builder: (_) => FashionMainPage());
       case '/womenfashion':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
       case '/womenfashiondetail':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
       case '/womenfashiondress':return MaterialPageRoute(builder: (_)=>WomenDressDetailPage());
@@ -49,6 +51,8 @@ class NavigationHelper{
       case '/orderdone':return MaterialPageRoute(builder: (_)=>OrderPlaced());
       case '/orders':return MaterialPageRoute(builder: (_)=>OrdersPage());
       case '/accountinfo':return MaterialPageRoute(builder: (_)=>AccountInfo());
+      case '/coupns': return MaterialPageRoute(builder: (_) => Coupons());
+      case '/customersupport': return MaterialPageRoute(builder: (_) => CustomerSupport());
 
 
       /* seller screens*/

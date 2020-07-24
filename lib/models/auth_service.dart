@@ -1,6 +1,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as JSON;
 
 
 
@@ -10,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthService {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final facebookLogin = new FacebookLogin();
 
   // handleAuth() {
   //   return StreamBuilder(
@@ -25,6 +29,40 @@ class AuthService {
   //   );
   // }
 
+
+
+
+  // Facebook OAuth
+  loginWithFB() async{
+
+    // print('starting....');
+
+    // final result = await facebookLogin.logInWithReadPermissions(['email']);
+    // final result = await facebookLogin.logIn(['cwsfirebase@gmail.com']);
+    final result = await facebookLogin.logIn(['email']); 
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final token = result.accessToken.token;
+        final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}');
+        final profile = JSON.jsonDecode(graphResponse.body);
+        print(profile);
+        
+        break;
+
+      case FacebookLoginStatus.cancelledByUser:
+        // setState(() => _isLoggedIn = false );
+        break;
+      case FacebookLoginStatus.error:
+        // setState(() => _isLoggedIn = false );
+        break;
+    }
+
+  }
+
+  logoutFB(){
+    facebookLogin.logOut();
+    
+  }
 
   // Google OAuth
   signInWithGoogle() async {
@@ -59,6 +97,7 @@ class AuthService {
     FirebaseAuth.instance.signOut();
   }
 
+  // OTP Sign in
   signWithOTP(smsCode, verificationId) {
     try{
       AuthCredential authCredential = PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: smsCode);
@@ -66,5 +105,12 @@ class AuthService {
     }catch(error) {
       print(error.toString() + " ___________________________");
     }
+  }
+
+
+  // Email Sign in
+  signInWithEmail(String email, String password) async {
+    AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    return await result.user;
   }
 }
