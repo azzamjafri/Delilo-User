@@ -9,7 +9,8 @@ import 'package:delilo/screens/home/cart.dart';
 import 'package:delilo/screens/home/coupons/coupons.dart';
 import 'package:delilo/screens/home/fashion/fashionmain.dart';
 import 'package:delilo/screens/home/fashion/kidsfashion.dart';
-import 'package:delilo/screens/home/fashion/mensfashion.dart';
+import 'package:delilo/screens/home/fashion/men/men_fashion_category.dart';
+import 'package:delilo/screens/home/fashion/men/mensfashion.dart';
 import 'package:delilo/screens/home/fashion/womenfashion.dart';
 import 'package:delilo/screens/home/fashion/womenfashiondress.dart';
 import 'package:delilo/screens/home/homepage.dart';
@@ -42,9 +43,9 @@ class NavigationHelper{
       case '/womenfashion':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
       case '/womenfashiondetail':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
       case '/womenfashiondress':return MaterialPageRoute(builder: (_)=>WomenDressDetailPage());
-      case '/mensfashion':return MaterialPageRoute(builder: (_)=>MensFashionScreen());
+      case '/mensfashion':return MaterialPageRoute(builder: (_) => MensFashionScreen());
       case '/kidsfashion':return MaterialPageRoute(builder: (_)=>KidsFashionScreen());
-      case '/productsdetail':return MaterialPageRoute(builder: (_)=>ProductDetailPage());
+      case '/productsdetail':return MaterialPageRoute(builder: (_) => ProductDetailPage(args));
       case '/cart':return MaterialPageRoute(builder: (_)=>CartPage());
       case '/payment':return MaterialPageRoute(builder: (_)=>PaymentPage());
       case '/adressconfirm':return MaterialPageRoute(builder: (_)=>AdressPage());
@@ -53,6 +54,7 @@ class NavigationHelper{
       case '/accountinfo':return MaterialPageRoute(builder: (_)=>AccountInfo());
       case '/coupns': return MaterialPageRoute(builder: (_) => Coupons());
       case '/customersupport': return MaterialPageRoute(builder: (_) => CustomerSupport());
+      case '/menfashioncategory': return MaterialPageRoute(builder: (_) => MenFashionCategory(args));
 
 
       /* seller screens*/
@@ -73,6 +75,8 @@ class NavigationHelper{
 
 
 
+      default:
+        return null;
 
 
 

@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Delilo',
       onGenerateRoute: NavigationHelper.onGenerateroutes,
       home: Wrapper(),
     );
