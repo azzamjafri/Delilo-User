@@ -1,7 +1,7 @@
 import 'package:delilo/screens/auxillary/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
-import 'package:flutter/services.dart';
+
 
 
 
@@ -66,7 +66,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               padding: const EdgeInsets.fromLTRB(10,0,10,0),
                               child: Icon(Icons.search,size: 35,color: Colors.green.withOpacity(.75),),
                             ),
-                            hintText: "Search fro Products, Shops"
+                            hintText: "Search for Products, Shops"
                         ),
                         validator: (value){},
                       ),
@@ -116,14 +116,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     children: [
                       Image.asset(
                         "assets/Union 1.png",
-
                         //color: Colors.black87,
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         //direction: Axis.vertical,
-
                         children: [
                           Text(
                             "Shop Name",

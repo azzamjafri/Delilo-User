@@ -352,7 +352,11 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom:18.0),
-                    child: Container(height: 27,child: Align(alignment: Alignment.bottomCenter,child: RichText(text: TextSpan(style: TextStyle(color: Colors.black87, fontSize: 16.0),children: [TextSpan(text: "Already have a Account? "),TextSpan(text: "Login",style: TextStyle(color: Colors.green))])))),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/signin');
+                      },
+                      child: Container(height: 27,child: Align(alignment: Alignment.bottomCenter,child: RichText(text: TextSpan(style: TextStyle(color: Colors.black87, fontSize: 16.0),children: [TextSpan(text: "Already have a Account? "),TextSpan(text: "Login",style: TextStyle(color: Colors.green))]))))),
                   ),
 
 

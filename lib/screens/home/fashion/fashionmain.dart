@@ -51,7 +51,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                                   padding: const EdgeInsets.fromLTRB(10,0,10,0),
                                   child: Icon(Icons.search,size: 35,color: Colors.green.withOpacity(.75),),
                                 ),
-                                hintText: "Search fro Products, Shops"
+                                hintText: "Search for Products, Shops"
                             ),
                             validator: (value){},
                           ),
@@ -76,7 +76,9 @@ class _FashionMainPageState extends State<FashionMainPage> {
                       return Transform.scale(
                         scale: i == _index ? 1 : 0.9,
                         child: GestureDetector(
-                          onTap: (){Navigator.pushNamed(context, '/productsdetail');},
+                          onTap: (){
+                            Navigator.pushNamed(context, '/productsdetail');
+                            },
                           child: Card(
                             elevation: 6,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

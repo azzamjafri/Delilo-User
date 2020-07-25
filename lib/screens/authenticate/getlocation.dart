@@ -128,6 +128,7 @@ class _GetLocationPageState extends State<GetLocationPage> {
                         }else {
                           Firestore.instance.collection('users').document(user.uid).updateData({
                             'location' : currentLocation.latitude.toString() + ',' + currentLocation.longitude.toString(),
+                            'member' : 'Gold Member'
                           });
                         }
                         Navigator.pushNamed(context, '/signin');
