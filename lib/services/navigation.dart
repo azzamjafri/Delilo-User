@@ -8,11 +8,12 @@ import 'package:delilo/screens/home/account.dart';
 import 'package:delilo/screens/home/cart.dart';
 import 'package:delilo/screens/home/coupons/coupons.dart';
 import 'package:delilo/screens/home/fashion/fashionmain.dart';
-import 'package:delilo/screens/home/fashion/kidsfashion.dart';
+import 'package:delilo/screens/home/fashion/kids/kids_fashion_category.dart';
+import 'package:delilo/screens/home/fashion/kids/kidsfashion.dart';
 import 'package:delilo/screens/home/fashion/men/men_fashion_category.dart';
 import 'package:delilo/screens/home/fashion/men/mensfashion.dart';
-import 'package:delilo/screens/home/fashion/womenfashion.dart';
-import 'package:delilo/screens/home/fashion/womenfashiondress.dart';
+import 'package:delilo/screens/home/fashion/women/women_fashion_category.dart';
+import 'package:delilo/screens/home/fashion/women/womenfashion.dart';
 import 'package:delilo/screens/home/homepage.dart';
 import 'package:delilo/screens/home/orders.dart';
 import 'package:delilo/screens/home/paymentpage.dart';
@@ -40,11 +41,10 @@ class NavigationHelper{
       case '/siginphone':return MaterialPageRoute(builder: (_) => SigninPhonePage());
       case '/homescreen':return MaterialPageRoute(builder: (_) => HomePageScreen());
       case '/fashionmain':return MaterialPageRoute(builder: (_) => FashionMainPage());
-      case '/womenfashion':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
+      case '/womenfashion':return MaterialPageRoute(builder: (_) => WomenFashionScreen());
       case '/womenfashiondetail':return MaterialPageRoute(builder: (_)=>WomenFashionScreen());
-      case '/womenfashiondress':return MaterialPageRoute(builder: (_)=>WomenDressDetailPage());
       case '/mensfashion':return MaterialPageRoute(builder: (_) => MensFashionScreen());
-      case '/kidsfashion':return MaterialPageRoute(builder: (_)=>KidsFashionScreen());
+      case '/kidsfashion':return MaterialPageRoute(builder: (_) => KidsFashionScreen());
       case '/productsdetail':return MaterialPageRoute(builder: (_) => ProductDetailPage(args));
       case '/cart':return MaterialPageRoute(builder: (_)=>CartPage());
       case '/payment':return MaterialPageRoute(builder: (_)=>PaymentPage());
@@ -55,6 +55,8 @@ class NavigationHelper{
       case '/coupns': return MaterialPageRoute(builder: (_) => Coupons());
       case '/customersupport': return MaterialPageRoute(builder: (_) => CustomerSupport());
       case '/menfashioncategory': return MaterialPageRoute(builder: (_) => MenFashionCategory(args));
+      case '/womenfashioncategory':return MaterialPageRoute(builder: (_) => WomenFashionCategory(args));
+      case '/kidsfashioncategory' : return MaterialPageRoute(builder: (_) => KidsFashionCategory(args));
 
 
       /* seller screens*/

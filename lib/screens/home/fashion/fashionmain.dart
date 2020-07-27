@@ -76,24 +76,19 @@ class _FashionMainPageState extends State<FashionMainPage> {
                   height: 200,
                   child: StreamBuilder(
                     stream: Firestore.instance.collection('fashion').document('main_page').snapshots(),
-
                     builder: (context, snapshot) {
-
                       if (snapshot.hasError)
                         return Center(child: Text('Oops ! An error occured'));
-
-                      
-
                       else {
-
                         switch (snapshot.connectionState) {
-
                           case ConnectionState.waiting:
                             return Center(
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Loading Data ....', style: TextStyle(fontStyle: FontStyle.italic)),
+                                Text('Loading Data ....',
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic)),
                                 Padding(padding: EdgeInsets.only(top: 2.0)),
                                 CircularProgressIndicator(),
                               ],
@@ -104,62 +99,83 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             // print('page builder .....\n');
                             // print(snapshot.data['ref'].toString());
                             if (snapshot.hasData == false)
-                                return Center(child: Text('No Items :)'));
-                            else{
+                              return Center(child: Text('No Items :)'));
+                            else {
                               return PageView.builder(
-                              itemCount: 4,
-                              controller: PageController(viewportFraction: 0.6),
-                              // onPageChanged: (int index) =>setState(() => _index = index),
-                              onPageChanged: (index) => _index = index,
-                              itemBuilder: (_, i) {
-                                return Transform.scale(
-                                  scale: i == _index ? 1 : 0.9,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, '/productsdetail');
+                                itemCount: 5,
+                                controller:
+                                    PageController(viewportFraction: 0.6),
+                                // onPageChanged: (int index) =>setState(() => _index = index),
+                                onPageChanged: (index) => _index = index,
+                                itemBuilder: (_, i) {
+                                  return FutureBuilder(
+                                    future: Firestore.instance.document(snapshot.data['ref'][i]).get(),
+                                    builder: (context, shot) {
+                                      switch (shot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return Center(child: new Text('Fetching....', style: TextStyle(fontStyle: FontStyle.italic)));
+                                        default:
+                                          if (shot.hasError)
+                                            return new Text('Error: ${shot.error}');
+                                          else {
+                                            return Transform.scale(
+                                              scale: i == _index ? 1 : 0.9,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pushNamed(context, '/productsdetail', arguments: shot.data);
+                                                },
+                                                child: Card(
+                                                  elevation: 6,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(20)),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/Image 5.png'),
+                                                      fit: BoxFit.fitHeight,
+                                                      alignment:
+                                                          Alignment.topCenter,
+                                                    )),
+                                                    
+                                                    child: FractionallySizedBox(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      heightFactor: .4,
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.green,
+                                                            borderRadius: BorderRadius.only(
+                                                                bottomLeft: Radius.circular(20),
+                                                                bottomRight: Radius.circular(20))),
+                                                        
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.fromLTRB(8.0, 3.0, 3.0, 4.0),
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
+                                                              Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
+                                                              Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                      }
                                     },
-                                    child: Card(
-                                      elevation: 6,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/Union 1.png'),
-                                          fit: BoxFit.fitHeight,
-                                          alignment: Alignment.topCenter,
-                                        )),
-                                        /* decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage())
-                                ),*/
-                                        child: FractionallySizedBox(
-                                          alignment: Alignment.bottomCenter,
-                                          heightFactor: .4,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.green,
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(20))),
-                                            child: Center(
-                                                child:
-                                                    Text("Some Description")),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
                             }
-                            // Firestore.instance.collection(snapshot.data['ref'][0]).document();
-                            
+                          // Firestore.instance.collection(snapshot.data['ref'][0]).document();
+
                         }
                       }
                     },
@@ -251,7 +267,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                                   image: DecorationImage(image: AssetImage())
                                 ),*/
                             child: Center(
-                              child: Text("Children",
+                              child: Text("Kids",
                                   style: TextStyle(color: Colors.white)),
                             ),
                           ),
@@ -262,70 +278,121 @@ class _FashionMainPageState extends State<FashionMainPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: Container(
-                    height: 300,
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      children: [
-                        Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage('assets/Union 1.png'),
-                              fit: BoxFit.fitHeight,
-                              alignment: Alignment.topCenter,
-                            )),
-                            /* decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage())
-                            ),*/
-                            child: FractionallySizedBox(
-                              alignment: Alignment.bottomCenter,
-                              heightFactor: .4,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(20),
-                                        bottomRight: Radius.circular(20))),
-                                child: Center(child: Text("Some Description")),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage('assets/Union 1.png'),
-                              fit: BoxFit.fitHeight,
-                              alignment: Alignment.topCenter,
-                            )),
-                            /* decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage())
-                            ),*/
-                            child: FractionallySizedBox(
-                              alignment: Alignment.bottomCenter,
-                              heightFactor: .4,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(20),
-                                        bottomRight: Radius.circular(20))),
-                                child: Center(child: Text("Some Description")),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  child:  Container(
+                  width: width,
+                  height: height,
+                  child: StreamBuilder(
+                    stream: Firestore.instance.collection('fashion').document('main_page').snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError)
+                        return Center(child: Text('Oops ! An error occured'));
+                      else {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
+                            return Center(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Loading Data ....',
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic)),
+                                Padding(padding: EdgeInsets.only(top: 2.0)),
+                                CircularProgressIndicator(),
+                              ],
+                            ));
+                            break;
+
+                          default:
+                            // print('page builder .....\n');
+                            // print(snapshot.data['ref'].toString());
+                            if (snapshot.hasData == false)
+                              return Center(child: Text('No Items :)'));
+                            else {
+                              int count = snapshot.data['ref'].length;
+                              return GridView.builder(
+                                itemCount: count,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                                // controller: PageController(viewportFraction: 0.6),
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (_, i) {
+
+                                  return FutureBuilder(
+                                    future: Firestore.instance.document(snapshot.data['ref'][i]).get(),
+                                    builder: (context, shot) {
+                                      switch (shot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return Center(child: new Text('Fetching....', style: TextStyle(fontStyle: FontStyle.italic)));
+                                        default:
+                                          if (shot.hasError)
+                                            return new Text(
+                                                'Error: ${shot.error}');
+                                          else {
+                                            return Transform.scale(
+                                              scale: i == _index ? 1 : 0.9,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  
+                                                  Navigator.pushNamed(context,'/productsdetail',arguments: shot.data);
+                                                },
+                                                child: Card(
+                                                  elevation: 6,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/Image 5.png'),
+                                                      fit: BoxFit.fitHeight,
+                                                      alignment:
+                                                          Alignment.topCenter,
+                                                    )),
+                                                    /* decoration: BoxDecoration(image: DecorationImage(image: AssetImage())),*/
+                                                    child: FractionallySizedBox(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      heightFactor: .4,
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.green,
+                                                            borderRadius: BorderRadius.only(
+                                                                bottomLeft: Radius.circular(20),
+                                                                bottomRight: Radius.circular(20))),
+                                                        // child: Center(child: Text("${shot.data['name']}")),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.fromLTRB(8.0, 3.0, 3.0, 4.0),
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
+                                                              Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
+                                                              Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                      }
+                                    },
+                                  );
+                                },
+                              );
+                            }
+                          // Firestore.instance.collection(snapshot.data['ref'][0]).document();
+
+                        }
+                      }
+                    },
                   ),
+                ),
                 ),
               ],
             ),

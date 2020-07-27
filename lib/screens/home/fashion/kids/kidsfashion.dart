@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 
-class MensFashionScreen extends StatefulWidget {
+
+class KidsFashionScreen extends StatefulWidget {
   @override
-  _MensFashionScreenState createState() => _MensFashionScreenState();
+  _KidsFashionScreenState createState() => _KidsFashionScreenState();
 }
 
-class _MensFashionScreenState extends State<MensFashionScreen> {
-  int _index = 0;
+class _KidsFashionScreenState extends State<KidsFashionScreen> {
+  int _index=0;
   @override
   Widget build(BuildContext context) {
     double height = displayHeight(context);
@@ -20,19 +21,12 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
           child: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 18.0, 0, 18),
+                padding: const EdgeInsets.fromLTRB(0,18.0,0,18),
                 child: Row(
                   children: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.green,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        }),
+                    IconButton(icon: Icon(Icons.arrow_back,color: Colors.green,), onPressed: (){Navigator.pop(context);}),
                     Container(
-                      width: width * .8,
+                      width: width*.8,
                       child: Material(
                         elevation: 5,
                         shape: StadiumBorder(),
@@ -40,21 +34,15 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                           // key: __passwordkey,
                           enableInteractiveSelection: true,
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(width: 4),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
+
+                              border: OutlineInputBorder(borderSide: BorderSide(width: 4),borderRadius: BorderRadius.all(Radius.circular(30))),
                               prefixIcon: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: Icon(
-                                  Icons.search,
-                                  size: 35,
-                                  color: Colors.green.withOpacity(.75),
-                                ),
+                                padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                                child: Icon(Icons.search,size: 35,color: Colors.green.withOpacity(.75),),
                               ),
-                              hintText: "Search for Products"),
-                          validator: (value) {},
+                              hintText: "Search for Products"
+                          ),
+                          validator: (value){},
                         ),
                       ),
                     ),
@@ -67,33 +55,20 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      "Suits",
-                      style: TextStyle(fontSize: 20, color: Colors.green),
-                    ),
-                    Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        height: 30,
-                        width: width * .2,
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/menfashioncategory', arguments: 'suits');
-                            },
-                            child: Text("More"))),
+                    Text("Baby Clothes",style: TextStyle(fontSize: 20,color: Colors.green),),
+                    Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/kidsfashioncategory', arguments: 'baby');}, child: Text("More"))),
+
                   ],
                 ),
               ),
-              Container(
+               Container(
                 width: width,
                 height: 200,
                 child: StreamBuilder(
                     stream: Firestore.instance
                         .collection('fashion')
-                        .document('men')
-                        .collection('suits')
+                        .document('kids')
+                        .collection('baby')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError)
@@ -139,7 +114,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                           image:
-                                              AssetImage('assets/formal.png'),
+                                              AssetImage('assets/fashion4.jpg'),
                                           fit: BoxFit.fitHeight,
                                           alignment: Alignment.topCenter,
                                         )),
@@ -181,39 +156,55 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                       
                     }),
               ),
+              // Container(
+              //   width: width,
+              //   height: 200,
+              //   child:PageView.builder(
+              //     itemCount: 4,
+              //     controller: PageController(viewportFraction: 0.4),
+              //     onPageChanged: (int index) => setState(() => _index = index),
+              //     itemBuilder: (_, i) {
+              //       return Transform.scale(
+              //         scale: i == _index ? 1 : 0.9,
+              //         child: Card(
+              //           elevation: 6,
+              //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              //           child: Container(
+              //             decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage('assets/fashion4.jpg'),fit: BoxFit.fitHeight,
+              //                   alignment: Alignment.topCenter,)
+              //             ),
+              //             /* decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage())
+              //               ),*/
+              //             child: FractionallySizedBox(alignment: Alignment.bottomCenter,heightFactor: .4,child: Container(decoration: BoxDecoration(color:Colors.green,borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))),child: Center(child: Text("Some Description")),),),
+
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      "Shirts",
-                      style: TextStyle(fontSize: 20, color: Colors.green),
-                    ),
-                    Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        height: 30,
-                        width: width * .2,
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/menfashioncategory', arguments: 'shirts');
-                            },
-                            child: Text("More"))),
+                    Text("Girl kids",style: TextStyle(fontSize: 20,color: Colors.green),),
+                    Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/kidsfashioncategory', arguments: 'girls');}, child: Text("More"))),
+
                   ],
                 ),
               ),
-             Container(
+               Container(
                 width: width,
                 height: 200,
                 child: StreamBuilder(
                     stream: Firestore.instance
                         .collection('fashion')
-                        .document('men')
-                        .collection('shirts')
+                        .document('kids')
+                        .collection('girls')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError)
@@ -225,7 +216,8 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                             return Center(
                                 child: Column(
                               children: [
-                                Text('Loading Data ....'),
+                                Text('Loading Data ....', style: TextStyle(fontStyle: FontStyle.italic)),
+                                Padding(padding: EdgeInsets.only(top: 2.0)),
                                 CircularProgressIndicator(),
                               ],
                             ));
@@ -258,7 +250,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                           image:
-                                              AssetImage('assets/shirt.png'),
+                                              AssetImage('assets/fashion4.jpg'),
                                           fit: BoxFit.fitHeight,
                                           alignment: Alignment.topCenter,
                                         )),
@@ -282,7 +274,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                                 children: [
                                                   Text('${doc['name']}', style: TextStyle(color: Colors.white)),
                                                   Center(child: Text('${doc['shop_name']}', style: TextStyle(color: Colors.white))),
-                                                  Text('${doc['price']}', style: TextStyle(color: Colors.white)),
+                                                  Text('₹ ${doc['price']}', style: TextStyle(color: Colors.white)),
                                                 ],
                                               ),
                                             ),
@@ -300,39 +292,57 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                       
                     }),
               ),
+              // Container(
+              //   width: width,
+              //   height: 200,
+              //   child:PageView.builder(
+              //     itemCount: 4,
+              //     controller: PageController(viewportFraction: 0.4),
+              //     onPageChanged: (int index) => setState(() => _index = index),
+              //     itemBuilder: (_, i) {
+              //       return Transform.scale(
+              //         scale: i == _index ? 1 : 0.9,
+              //         child: Card(
+              //           elevation: 6,
+              //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              //           child: Container(
+              //             decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage('assets/fashion4.jpg'),fit: BoxFit.fitHeight,
+              //                   alignment: Alignment.topCenter,)
+              //             ),
+              //             /* decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage())
+              //               ),*/
+              //             child: FractionallySizedBox(alignment: Alignment.bottomCenter,heightFactor: .4,child: Container(decoration: BoxDecoration(color:Colors.green,borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))),child: Center(child: Text("Some Description")),),),
+
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      "T-Shirts",
-                      style: TextStyle(fontSize: 20, color: Colors.green),
-                    ),
-                    Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        height: 30,
-                        width: width * .2,
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/menfashioncategory', arguments: 'tshirts');
-                            },
-                            child: Text("More"))),
+                    Text("Boy kids",style: TextStyle(fontSize: 20,color: Colors.green),),
+                    Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/kidsfashioncategory', arguments: 'boys');}, child: Text("More"))),
+
                   ],
                 ),
               ),
-              Container(
+
+               Container(
                 width: width,
                 height: 200,
                 child: StreamBuilder(
                     stream: Firestore.instance
                         .collection('fashion')
-                        .document('men')
-                        .collection('tshirts')
+                        .document('kids')
+                        .collection('boys')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError)
@@ -344,7 +354,8 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                             return Center(
                                 child: Column(
                               children: [
-                                Text('Loading Data ....'),
+                                Text('Loading Data ....', style: TextStyle(fontStyle: FontStyle.italic)),
+                                Padding(padding: EdgeInsets.only(top: 2.0)),
                                 CircularProgressIndicator(),
                               ],
                             ));
@@ -366,7 +377,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                   scale: i == _index ? 1 : 0.9,
                                   child: GestureDetector(
                                     onTap: () {
-                                      Navigator.pushNamed(context, '/productsdetail', arguments: doc);
+                                      Navigator.pushNamed(context, '/product  sdetail', arguments: doc);
                                     },
                                     child: Card(
                                       elevation: 6,
@@ -377,7 +388,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                           image:
-                                              AssetImage('assets/tshirt.png'),
+                                              AssetImage('assets/fashion4.jpg'),
                                           fit: BoxFit.fitHeight,
                                           alignment: Alignment.topCenter,
                                         )),
@@ -401,7 +412,7 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                                                 children: [
                                                   Text('${doc['name']}', style: TextStyle(color: Colors.white)),
                                                   Center(child: Text('${doc['shop_name']}', style: TextStyle(color: Colors.white))),
-                                                  Text('${doc['price']}', style: TextStyle(color: Colors.white)),
+                                                  Text('₹ ${doc['price']}', style: TextStyle(color: Colors.white)),
                                                 ],
                                               ),
                                             ),
@@ -419,6 +430,38 @@ class _MensFashionScreenState extends State<MensFashionScreen> {
                       
                     }),
               ),
+              // Container(
+              //   width: width,
+              //   height: 200,
+              //   child:PageView.builder(
+              //     itemCount: 4,
+              //     controller: PageController(viewportFraction: 0.4),
+              //     onPageChanged: (int index) => setState(() => _index = index),
+              //     itemBuilder: (_, i) {
+              //       return Transform.scale(
+              //         scale: i == _index ? 1 : 0.9,
+              //         child: Card(
+              //           elevation: 6,
+              //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              //           child: Container(
+              //             decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage('assets/fashion4.jpg'),fit: BoxFit.fitHeight,
+              //                   alignment: Alignment.topCenter,)
+              //             ),
+              //             /* decoration: BoxDecoration(
+              //                 image: DecorationImage(image: AssetImage())
+              //               ),*/
+              //             child: FractionallySizedBox(alignment: Alignment.bottomCenter,heightFactor: .4,child: Container(decoration: BoxDecoration(color:Colors.green,borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))),child: Center(child: Text("Some Description")),),),
+
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+
+
+
             ],
           ),
         ),
