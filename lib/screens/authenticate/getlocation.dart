@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delilo/models/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'authenticate.dart';
+
 
 class GetLocationPage extends StatefulWidget {
 

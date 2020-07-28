@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delilo/models/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 
@@ -13,7 +13,7 @@ class AuthenticateScreen extends StatefulWidget {
   _AuthenticateScreenState createState() => _AuthenticateScreenState();
 }
 
-FirebaseUser user;
+
 
 class _AuthenticateScreenState extends State<AuthenticateScreen> {
 

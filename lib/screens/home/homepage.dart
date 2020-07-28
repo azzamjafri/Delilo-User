@@ -11,7 +11,8 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  int _index=0;
+  int _index = 0;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -283,23 +284,28 @@ class _HomePageScreenState extends State<HomePageScreen> {
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.green,
           selectedItemColor: Colors.white,
-
+          
           items:  <BottomNavigationBarItem>[
             BottomNavigationBarItem(
+              
               icon: Container(
                 height: 50,
                   width: 50,
-                  decoration: BoxDecoration(
+                  decoration:  
+                    BoxDecoration(
                       color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(28))
-                  ),
+                  ) ,
                   child: Icon(Icons.home,color: Colors.green,)),
               title: Container(),
 
             ),
             BottomNavigationBarItem(
               icon: GestureDetector(
-                onTap: (){Navigator.pushNamed(context, '/cart');},
+                onTap: (){
+                  Navigator.pushReplacementNamed(context, '/cart');
+                  // Navigator.pushNamed(context, '/cart');
+                  },
                 child: Container(
                     height: 50,
                     width: 50,
@@ -314,7 +320,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
             ),
             BottomNavigationBarItem(
               icon: GestureDetector(
-                onTap: (){Navigator.pushNamed(context, '/accountinfo');},
+                onTap: (){
+                  Navigator.pushReplacementNamed(context, '/accountinfo');
+                  },
                 child: Container(
                     height: 50,
                     width: 50,

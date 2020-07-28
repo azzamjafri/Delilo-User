@@ -21,8 +21,8 @@ class _AccountInfoState extends State<AccountInfo> {
 
       ),
       body: Center(
-        child: Container(
-          child: Column(
+        child: SingleChildScrollView(
+                  child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
@@ -39,8 +39,8 @@ class _AccountInfoState extends State<AccountInfo> {
 
                     children: [
 
-                      CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/images/u.png")),
-                      Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 12),))),
+                      CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/profileI.png")),
+                      Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 10),))),
                       Padding(
                         padding: const EdgeInsets.only(right:38.0),
                         child: Column(
@@ -81,7 +81,7 @@ class _AccountInfoState extends State<AccountInfo> {
                     children: [
 
 
-                     // CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/images/u.png")),
+                     // CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/profileI.png")),
                       //Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 12),))),
                       Padding(
                         padding: const EdgeInsets.only(right:38.0),
@@ -99,12 +99,68 @@ class _AccountInfoState extends State<AccountInfo> {
                 elevation: 5,
                 margin: EdgeInsets.all(10),
               ),
-
-
             ],
           ),
         ),
       ),
+
+      bottomNavigationBar: getBottomNavBar(),
     );
+    
+  }
+
+
+  getBottomNavBar() {
+    return  BottomNavigationBar(
+          backgroundColor: Colors.green,
+          selectedItemColor: Colors.white,
+          
+          items:  <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              
+              icon: Container(
+                height: 50,
+                  width: 50,
+                  
+                  // child: Icon(Icons.home,color: Colors.green,)
+                  child: IconButton(icon: Icon(Icons.home, color: Colors.white), onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/homescreen');
+                  }),
+                  ),
+              title: Container(),
+
+            ),
+            BottomNavigationBarItem(
+              icon: GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacementNamed(context, '/cart');
+                  // Navigator.pushNamed(context, '/cart');
+                  },
+                child: Container(
+                    height: 50,
+                    width: 50,
+                    /*decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(30))
+                    ),*/
+                    child: Icon(Icons.shopping_cart,color: Colors.white,)),
+              ),
+              title: Container(),
+
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                  height: 50,
+                  width: 50,
+                 decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(30))
+                  ),
+                  child: Icon(Icons.person,color: Colors.green,)),
+              title: Container(),
+
+            ),
+          ],
+        );
   }
 }

@@ -46,12 +46,12 @@ class NavigationHelper{
       case '/mensfashion':return MaterialPageRoute(builder: (_) => MensFashionScreen());
       case '/kidsfashion':return MaterialPageRoute(builder: (_) => KidsFashionScreen());
       case '/productsdetail':return MaterialPageRoute(builder: (_) => ProductDetailPage(args));
-      case '/cart':return MaterialPageRoute(builder: (_)=>CartPage());
+      case '/cart':return MaterialPageRoute(builder: (_) => CartPage());
       case '/payment':return MaterialPageRoute(builder: (_)=>PaymentPage());
       case '/adressconfirm':return MaterialPageRoute(builder: (_)=>AdressPage());
       case '/orderdone':return MaterialPageRoute(builder: (_)=>OrderPlaced());
       case '/orders':return MaterialPageRoute(builder: (_)=>OrdersPage());
-      case '/accountinfo':return MaterialPageRoute(builder: (_)=>AccountInfo());
+      case '/accountinfo':return MaterialPageRoute(builder: (_) => AccountInfo());
       case '/coupns': return MaterialPageRoute(builder: (_) => Coupons());
       case '/customersupport': return MaterialPageRoute(builder: (_) => CustomerSupport());
       case '/menfashioncategory': return MaterialPageRoute(builder: (_) => MenFashionCategory(args));

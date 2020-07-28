@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delilo/models/auth_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 
 class ProductDetailPage extends StatefulWidget {
+  
   DocumentSnapshot document;
 
   ProductDetailPage(var t) {
@@ -28,6 +31,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   int _index = 0;
 
+  final key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     // Firestore.instance.collection('fashion').document().collection('reviews').getDocuments()
@@ -37,6 +41,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return SafeArea(
       child: Scaffold(
         //extendBodyBehindAppBar: true,
+        key: key,
         floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(top: 80.0),
@@ -402,14 +407,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         height: 50,
                         width: width * .8,
                         child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/cart');
+                            onPressed: () async {
+                              // print(widget.document.reference.path);
+                              bool add = true;
+                              await Firestore.instance.collection('users').document(user.uid).get().then((value) => {
+                                value.data['cart'].forEach((element) {
+                                  if(element == widget.document.reference.path) {
+                                    add = false;
+                                    
+                                  }
+                                })
+                              });
+                              if(add){
+                                Firestore.instance.collection('users').document(user.uid).updateData({
+                                'cart': FieldValue.arrayUnion([widget.document.reference.path]),
+                              });
+                              }else{
+                                key.currentState.showSnackBar(SnackBar(content: Text('Item Already Present in the Cart !'),));
+                              }
+                              
                             },
-                            child: Text(
-                              "Add To Cart",
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 15),
-                            )))),
+                            child: Text("Add To Cart", style: TextStyle(color: Colors.green, fontSize: 15),)
+                            )
+                          )
+                        ),
                 title: Container(),
               ),
               BottomNavigationBarItem(

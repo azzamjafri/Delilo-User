@@ -8,7 +8,7 @@ import 'dart:convert' as JSON;
 
 
 
-
+FirebaseUser user;
 
 class AuthService {
 
@@ -72,24 +72,28 @@ class AuthService {
     final AuthCredential credential = GoogleAuthProvider.getCredential(idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken);
 
     final AuthResult authResult = await FirebaseAuth.instance.signInWithCredential(credential);
-    final FirebaseUser user = authResult.user;
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
+    final FirebaseUser userR = authResult.user;
+    assert(!userR.isAnonymous);
+    assert(await userR.getIdToken() != null);
 
     final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
-    assert(user.uid == currentUser.uid);
-    return currentUser;
+    assert(userR.uid == currentUser.uid);
+    // print(currentUser.uid + '*****************************');
+    user = userR;
   }
 
   // Google OAuth signout
   signOutGoogle() async {
     await googleSignIn.signOut();
-    print('user sign out');
+    
   }
 
   // signIn
   signIn(AuthCredential credential) {
-    FirebaseAuth.instance.signInWithCredential(credential);
+    FirebaseAuth.instance.signInWithCredential(credential).whenComplete(() async {
+      user = await FirebaseAuth.instance.currentUser();
+    });
+    
   }
 
   // signOut
@@ -98,10 +102,11 @@ class AuthService {
   }
 
   // OTP Sign in
-  signWithOTP(smsCode, verificationId) {
+  signWithOTP(smsCode, verificationId) async {
     try{
       AuthCredential authCredential = PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: smsCode);
-      signIn(authCredential);
+      await signIn(authCredential);
+      user = await FirebaseAuth.instance.currentUser();
     }catch(error) {
       print(error.toString() + " ___________________________");
     }
@@ -111,6 +116,7 @@ class AuthService {
   // Email Sign in
   signInWithEmail(String email, String password) async {
     AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    return await result.user;
+    // return await result.user;
+    user = result.user;
   }
 }

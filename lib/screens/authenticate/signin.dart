@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 
 
+
+
 class SigninPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,10 @@ class SigninPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         AuthService().signInWithGoogle().whenComplete(() => Navigator.pushNamedAndRemoveUntil(context, '/homescreen', (route) => false));
+                        // AuthService().signInWithGoogle().whenComplete((value) {
+                        //   user = value;
+                        //   Navigator.pushNamedAndRemoveUntil(context, '/homescreen', (route) => false);
+                        // });
                       },
                       child: Container(
                         width: 150,

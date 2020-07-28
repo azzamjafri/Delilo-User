@@ -103,8 +103,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             else {
                               return PageView.builder(
                                 itemCount: 5,
-                                controller:
-                                    PageController(viewportFraction: 0.6),
+                                controller: PageController(viewportFraction: 0.6),
                                 // onPageChanged: (int index) =>setState(() => _index = index),
                                 onPageChanged: (index) => _index = index,
                                 itemBuilder: (_, i) {
