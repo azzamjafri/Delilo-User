@@ -42,7 +42,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Image.asset(
-                            'assets/images/u.png',
+                            'assets/u.png',
                             width: width * .17,
                             height: width * .19,
                             color: Colors.black87,
@@ -117,7 +117,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Image.asset(
-                            'assets/images/u.png',
+                            'assets/u.png',
                             width: width * .17,
                             height: width * .19,
                             color: Colors.black87,

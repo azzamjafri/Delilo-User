@@ -17,7 +17,7 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     super.initState();
     // setState(() => total = 0.0);
-    total.value = 0.0;
+    // total.value = 0.0;
     
   }
 
@@ -96,7 +96,7 @@ class _CartPageState extends State<CartPage> {
                                             return new Text('Error: ${snap.error}');
                                       else{
 
-                                        total.value += double.parse(snap.data['price']);
+                                        // total.value += double.parse(snap.data['price']);
                                         return ProductCard(
                                           productqty: 1,
                                           price: snap.data['price'],
@@ -165,7 +165,9 @@ class _CartPageState extends State<CartPage> {
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/payment');
+                                },
                               ))),
                     ),
                   ),
@@ -248,11 +250,11 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
 
-  // @override
-  // void initState() {
-  //   // setState(() => total.value += double.parse(widget.price));
-  //   total.value += double.parse(widget.price);
-  // }
+  @override
+  void initState() {
+    // setState(() => total.value += double.parse(widget.price));
+    total.value += double.parse(widget.price);
+  }
   @override
   Widget build(BuildContext context) {
     double height = displayHeight(context);

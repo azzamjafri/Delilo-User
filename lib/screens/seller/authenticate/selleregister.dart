@@ -30,14 +30,14 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
             width: wid,
             color: Color.fromRGBO(241,243,241, 1),
             /*decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('assets/images/back.png'),fit: BoxFit.fitWidth)
+              image: DecorationImage(image: AssetImage('assets/back.png'),fit: BoxFit.fitWidth)
             ),*/
             child: Form(
               child: ListView(
                 /*    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,*/
                 children: [
-                  Container(height: 120,child: Image.asset("assets/images/dellologo.png",)),
+                  Container(height: 120,child: Image.asset("assets/dellologo.png",)),
 
                   Container(
                     height: 240,
@@ -242,11 +242,6 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
                       ],
                     ),
                   ),
-
-
-
-
-
                 ],
               ),
             ),
@@ -278,7 +273,7 @@ class _GetGstDetailsState extends State<GetGstDetails> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom:15.0),
-                child: Container(height: 120,child: Image.asset("assets/images/dellologo.png",)),
+                child: Container(height: 120,child: Image.asset("assets/dellologo.png",)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -464,7 +459,7 @@ class _GetBankDetailsState extends State<GetBankDetails> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom:15.0),
-                child: Container(height: 120,child: Image.asset("assets/images/dellologo.png",)),
+                child: Container(height: 120,child: Image.asset("assets/dellologo.png",)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -675,7 +670,7 @@ class _CollectSignPageState extends State<CollectSignPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom:15.0),
-                child: Container(height: 120,child: Image.asset("assets/images/dellologo.png",)),
+                child: Container(height: 120,child: Image.asset("assets/dellologo.png",)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -821,7 +816,7 @@ class _SellerVerificationPageState extends State<SellerVerificationPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom:15.0),
-                  child: Container(height: 120,child: Image.asset("assets/images/dellologo.png",)),
+                  child: Container(height: 120,child: Image.asset("assets/dellologo.png",)),
                 ),
 
                 Card(
@@ -857,11 +852,11 @@ class _SellerVerificationPageState extends State<SellerVerificationPage> {
                       children: [
 
 
-                        // CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/images/u.png")),
+                        // CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/u.png")),
                         //Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 12),))),
                         Padding(
                           padding: const EdgeInsets.only(right:38.0),
-                          child: Text("Tracking CArd\n\nOnly Possible To Implement With The Backend.\n Will be implemented with backend"),
+                          child: Text("Tracking Card\n\nOnly Possible To Implement With The Backend.\n Will be implemented with backend"),
 
                         )
 

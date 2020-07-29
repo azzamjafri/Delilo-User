@@ -34,8 +34,10 @@ class _FashionMainPageState extends State<FashionMainPage> {
                           child: Image.asset('assets/u.png'),
                         );
                       }),
+                      Spacer(),
                       Container(
-                        width: width * .8,
+                        width: width * .75,
+                        height: 46.0,
                         child: Material(
                           elevation: 5,
                           shape: StadiumBorder(),
@@ -45,11 +47,9 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(width: 4),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
+                                    borderRadius: BorderRadius.all(Radius.circular(30))),
                                 prefixIcon: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   child: Icon(
                                     Icons.search,
                                     size: 35,
@@ -61,19 +61,26 @@ class _FashionMainPageState extends State<FashionMainPage> {
                           ),
                         ),
                       ),
+                      Padding(padding: EdgeInsets.only(left: 15.0)),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    "FASHION",
-                    style: TextStyle(fontSize: 20, color: Colors.green),
-                  ),
+                  padding: const EdgeInsets.fromLTRB(22.0, 12.0, 0.0, 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text( "Fashion", style: TextStyle(fontSize: 20, color: Colors.green),),
+                      Container(
+                        width: 46.0,
+                        child: Divider(thickness: 3.8, color: Colors.black,)),
+                    ],
+                  )
                 ),
                 Container(
                   width: width,
-                  height: 200,
+                  
+                  height: 270,
                   child: StreamBuilder(
                     stream: Firestore.instance.collection('fashion').document('main_page').snapshots(),
                     builder: (context, snapshot) {
@@ -127,41 +134,59 @@ class _FashionMainPageState extends State<FashionMainPage> {
                                                   elevation: 6,
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius: BorderRadius.circular(20)),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/Image 5.png'),
-                                                      fit: BoxFit.fitHeight,
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                    )),
-                                                    
-                                                    child: FractionallySizedBox(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      heightFactor: .4,
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.green,
-                                                            borderRadius: BorderRadius.only(
-                                                                bottomLeft: Radius.circular(20),
-                                                                bottomRight: Radius.circular(20))),
-                                                        
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.fromLTRB(8.0, 3.0, 3.0, 4.0),
-                                                          child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
-                                                              Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
-                                                              Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
-                                                            ],
+                                                  child: Stack(
+                                                    children: [
+
+                                                     
+                                                      Positioned(
+                                                        top: 1.0,
+                                                        bottom: 0.1,
+                                                        child: FractionallySizedBox(
+                                                        alignment: Alignment.bottomCenter,
+                                                        heightFactor: .4,
+                                                        child: Container(
+                                                          width: width / 2 + 30.0,
+                                                          decoration: BoxDecoration(
+                                                              color: Colors.lightGreen.shade500,
+                                                              borderRadius: BorderRadius.only(
+                                                              
+                                                                  bottomLeft: Radius.circular(20),
+                                                                  bottomRight: Radius.circular(20))),
+                                                          
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 3.0, 4.0),
+                                                            child: Column(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
+                                                                Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
+                                                                Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
                                                     ),
+                                                      ),
+
+                                                       ClipRRect(
+                                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors.grey.withOpacity(0.5),
+                                                                spreadRadius: 10,
+                                                                blurRadius: 7,
+                                                                offset: Offset(3, 3), // changes position of shadow
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          height: 170.0,
+                                                          width: width / 2 + 45.0,
+                                                          child: Image.asset('assets/Image 5.png', fit: BoxFit.fill,)),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -198,13 +223,15 @@ class _FashionMainPageState extends State<FashionMainPage> {
                         width: 120,
                         child: Card(
                           elevation: 6,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: Container(
+                            
                             decoration: BoxDecoration(
+                              
                                 image: DecorationImage(
+                                  
                               image: AssetImage('assets/i.png'),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               alignment: Alignment.center,
                             )),
                             child: Center(
@@ -230,7 +257,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage('assets/3.png'),
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.fill,
                               alignment: Alignment.center,
                             )),
                             /* decoration: BoxDecoration(
@@ -259,7 +286,7 @@ class _FashionMainPageState extends State<FashionMainPage> {
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage('assets/6.png'),
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.fill,
                               alignment: Alignment.center,
                             )),
                             /* decoration: BoxDecoration(
@@ -326,57 +353,52 @@ class _FashionMainPageState extends State<FashionMainPage> {
                                             return new Text(
                                                 'Error: ${shot.error}');
                                           else {
-                                            return Transform.scale(
-                                              scale: i == _index ? 1 : 0.9,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  
-                                                  Navigator.pushNamed(context,'/productsdetail',arguments: shot.data);
-                                                },
-                                                child: Card(
-                                                  elevation: 6,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20)),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/Image 5.png'),
-                                                      fit: BoxFit.fitHeight,
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                    )),
-                                                    /* decoration: BoxDecoration(image: DecorationImage(image: AssetImage())),*/
-                                                    child: FractionallySizedBox(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      heightFactor: .4,
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.green,
-                                                            borderRadius: BorderRadius.only(
-                                                                bottomLeft: Radius.circular(20),
-                                                                bottomRight: Radius.circular(20))),
-                                                        // child: Center(child: Text("${shot.data['name']}")),
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.fromLTRB(8.0, 3.0, 3.0, 4.0),
-                                                          child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
-                                                              Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
-                                                              Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
-                                                            ],
+                                            return GestureDetector(
+                                              onTap: () {
+                                                
+                                                Navigator.pushNamed(context,'/productsdetail',arguments: shot.data);
+                                              },
+                                              child: Stack(
+                                                children: [
+                                                  Card(
+                                                elevation: 6,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(20)),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                                  child: Image.asset('assets/Image 5.png'))
+                                              ),
+                                              Positioned(
+                                                top: 1.0,
+                                                bottom: 1.0,
+                                                child: FractionallySizedBox(
+                                                    alignment: Alignment.bottomCenter,
+                                                    heightFactor: .4,
+                                                    
+                                                    child: Container(
+                                                      width: width / 2 - 2,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.green,
+                                                          borderRadius: BorderRadius.all(Radius.circular(20))
                                                           ),
+                                                      // child: Center(child: Text("${shot.data['name']}")),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.fromLTRB(8.0, 3.0, 3.0, 4.0),
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text('${shot.data['name']}', style: TextStyle(color: Colors.white)),
+                                                            Center(child: Text('${shot.data['shop_name']}', style: TextStyle(color: Colors.white))),
+                                                            Text('₹ ${shot.data['price']}', style: TextStyle(color: Colors.white)),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
                                               ),
+                                                ],
+                                              )
                                             );
                                           }
                                       }

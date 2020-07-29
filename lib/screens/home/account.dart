@@ -39,8 +39,11 @@ class _AccountInfoState extends State<AccountInfo> {
 
                     children: [
 
-                      CircleAvatar(backgroundColor: Colors.transparent,child: Image.asset("assets/profileI.png")),
-                      Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 10),))),
+                      Container(
+                        height: 80.0,
+                        width: 80.0,
+                        child: CircleAvatar(backgroundColor: Colors.transparent, child: Image.asset("assets/profileI.png"))),
+                      Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 30,width:width*.2,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/homescreen');}, child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 11),))),
                       Padding(
                         padding: const EdgeInsets.only(right:38.0),
                         child: Column(

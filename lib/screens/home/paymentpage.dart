@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:delilo/screens/auxillary/customclasses.dart';
 
+import 'cart.dart';
+
 class PaymentPage extends StatefulWidget {
   @override
   _PaymentPageState createState() => _PaymentPageState();
@@ -187,7 +189,7 @@ class _PaymentPageState extends State<PaymentPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text("Pay RS 480",style: TextStyle(color: Colors.white,fontSize: 20),),
+            Text("Pay Rs. ${total.value}",style: TextStyle(color: Colors.white,fontSize: 20),),
             Container(
                 height: 50,
                 width: 120,
@@ -229,6 +231,7 @@ class _AdressPageState extends State<AdressPage> {
           width: wid*.8,
           child: ListView(
             children: [
+              SizedBox(height: 20.0),
               Container(
                 margin: EdgeInsets.all(12),
                 height: 5 * 10.0,
@@ -359,7 +362,7 @@ class _AdressPageState extends State<AdressPage> {
                 padding: const EdgeInsets.only(top:45.0),
                 child: Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.all(Radius.circular(30))),height: 50,width:wid*.8,child: FlatButton(onPressed: (){Navigator.pushNamed(context, '/orderdone');}, child: Text("Confirm Order",style: TextStyle(color: Colors.white,fontSize: 20),))),
               ),
-
+              SizedBox(height: 30.0),
             ],
           ),
         ),
