@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delilo/models/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:delilo/screens/auxillary/customclasses.dart';
+
 
 
 class SellerDrawer extends StatefulWidget {
@@ -8,6 +10,16 @@ class SellerDrawer extends StatefulWidget {
 }
 
 class _SellerDrawerState extends State<SellerDrawer> {
+
+  String name = "";
+  @override
+  void initState() {
+    super.initState();
+    Firestore.instance.collection('seller').document(user.uid).get().then((value) {
+      name = value.data['name'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,7 +34,7 @@ class _SellerDrawerState extends State<SellerDrawer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.person_pin,size: 60,),
-                Text("Name"),
+                Text("$name"),
 
               ],
             ),),

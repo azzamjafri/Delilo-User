@@ -17,6 +17,7 @@ bool gstVerified = false;
 bool signatureVerified = false;
 bool bankAccountVerified = false;
 bool cancelChequeVerified = false;
+String email;
 
 
 class SellerRegisterScreen extends StatefulWidget {
@@ -328,6 +329,7 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
                               if(stat != 3) key.currentState.showSnackBar(SnackBar(content: Text('Please upload Id proof'),));
                               else if(stat == 1) key.currentState.showSnackBar(SnackBar(content: Text('Please wait while we are uploading Id :)'),));
                               if(canRegister) {
+                                email = emailController.text;
                                 await Firestore.instance.collection('sellers').document(user.uid).setData({
                                   'name' : userNameController.text,
                                   'email' : emailController.text,
@@ -336,6 +338,8 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
                                   'id' : idUrl,
                                   'password': 'test1234',
                                 });
+                                AuthService().signUpWithEmail(emailController.text.trim(), 'test1234');
+                                AuthService().sendEmailVerification();
                                 Navigator.pushNamed(context, '/getbusinessdetails');
                               }else{
                                 key.currentState.showSnackBar(SnackBar(content: Text('Something Went Wrong !!'),));

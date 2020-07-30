@@ -72,7 +72,7 @@ class NavigationHelper{
       case '/getbankdetails':return MaterialPageRoute(builder: (_) => BankDetails());
       case '/getsign':return MaterialPageRoute(builder: (_) => Signature());
       case '/verificationpage':return MaterialPageRoute(builder: (_) => EmailVerification());
-      case '/sellerhome':return MaterialPageRoute(builder: (_)=>SellerHomeScreen());
+      case '/sellerhome':return MaterialPageRoute(builder: (_) => SellerHomeScreen());
       case '/categorylisting':return MaterialPageRoute(builder: (_)=>SellerCategoryListing());
       case '/addproductpage':return MaterialPageRoute(builder: (_)=>NewProductPage());
       case '/outofstock':return MaterialPageRoute(builder: (_)=>OutOfStock());

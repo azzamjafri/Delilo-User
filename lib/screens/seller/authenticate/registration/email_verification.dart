@@ -1,3 +1,4 @@
+import 'package:delilo/models/auth_service.dart';
 import 'package:delilo/screens/seller/authenticate/selleregister.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class EmailVerification extends StatefulWidget {
 class _EmailVerificationState extends State<EmailVerification> {
   bool check = true;
   double verify = 0.0;
+  
 
   @override
   void initState() {
@@ -193,7 +195,7 @@ class _EmailVerificationState extends State<EmailVerification> {
     return new MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       onPressed: () {
-        
+        AuthService().signInWithEmail(email, 'test1234');
         Navigator.pushNamedAndRemoveUntil(context, '/sellerlogin', (route) => false);
         // Navigator.push(context, new MaterialPageRoute(builder: (context) => LoginPage()));
       },

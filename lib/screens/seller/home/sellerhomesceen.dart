@@ -25,7 +25,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
                 onTap: (){
                   Scaffold.of(context).openDrawer();
                 },
-                child: Image.asset('assets/images/u.png'),
+                child: Image.asset('assets/u.png'),
               );
             }
         ),
@@ -35,7 +35,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
           width: wid*.95,
           child: ListView(
             children: [
-              Text("Tester Alert:Design has been updated for Seller Flow from previous PDF document \n The Design implemented is the new & Aceepted design",style: TextStyle(color: Colors.red),),
+              // Text("Tester Alert:Design has been updated for Seller Flow from previous PDF document \n The Design implemented is the new & Aceepted design",style: TextStyle(color: Colors.red),),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -216,7 +216,7 @@ class _OutOfStockState extends State<OutOfStock> {
                 onTap: (){
                   Scaffold.of(context).openDrawer();
                 },
-                child: Image.asset('assets/images/u.png'),
+                child: Image.asset('assets/u.png'),
               );
             }
         ),
@@ -226,7 +226,7 @@ class _OutOfStockState extends State<OutOfStock> {
           width: wid*.95,
           child: ListView(
             children: [
-              Text("Design has been updated for Seller Flow from previous PDF document \n The Design implemented is the new & Aceepted design",style: TextStyle(color: Colors.red),),
+              // Text("Design has been updated for Seller Flow from previous PDF document \n The Design implemented is the new & Aceepted design",style: TextStyle(color: Colors.red),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -245,7 +245,7 @@ class _OutOfStockState extends State<OutOfStock> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/Union1.png'),
+                      Image.asset('assets/Union 2.png'),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -275,7 +275,7 @@ class _OutOfStockState extends State<OutOfStock> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/Union1.png'),
+                      Image.asset('assets/Union 1.png'),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -305,7 +305,7 @@ class _OutOfStockState extends State<OutOfStock> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/Union1.png'),
+                      Image.asset('assets/Union 2.png'),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -335,7 +335,7 @@ class _OutOfStockState extends State<OutOfStock> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/Union1.png'),
+                      Image.asset('assets/Union 1.png'),
 
                       Column(
                         mainAxisSize: MainAxisSize.max,

@@ -113,6 +113,20 @@ class AuthService {
   }
 
 
+  // Email Sign up
+  signUpWithEmail(String email, String password) async {
+    AuthResult auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    user = auth.user;
+  }
+
+  // Email Verification
+  sendEmailVerification() async {
+    FirebaseUser usr = await FirebaseAuth.instance.currentUser();
+    usr.sendEmailVerification();
+    
+  }
+
+
   // Email Sign in
   signInWithEmail(String email, String password) async {
     AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
