@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delilo/models/auth_service.dart';
+import 'package:delilo/screens/seller/authenticate/selleregister.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_document_picker/flutter_document_picker.dart';
+
 
 import 'email_verification.dart';
 import 'take_signature.dart';
@@ -17,12 +22,15 @@ class Signature extends StatefulWidget {
 class _SignatureState extends State<Signature> {
   int radioVal = 0;
   File file;
+  bool uploading = false;
 
+  final key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       body: getBody(),
+      key: key,
     );
   }
 
@@ -90,24 +98,52 @@ class _SignatureState extends State<Signature> {
     return new MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       onPressed: () async {
-        Navigator.push(context,
-            new MaterialPageRoute(builder: (context) => EmailVerification()));
+        if(uploading) key.currentState.showSnackBar(SnackBar(content: Text('Please wait while signature is uploading..')));
+        else{
+          Navigator.pushNamed(context, '/verificationpage');
+        }
+        
       },
       minWidth: MediaQuery.of(context).size.width / 1.35,
       color: Colors.green,
-      child: Text("Continue",
+      child: Text((uploading) ? "Uploading .." : "Continue",
           style: TextStyle(
               color: Colors.white, fontSize: 25.0, letterSpacing: 1.1)),
       height: 50.0,
     );
   }
 
+
+  uploadDoc() async {
+    
+    file = await FilePicker.getFile();
+    
+    setState(() {
+      uploading = (file == null) ? false : true;
+    });
+    StorageReference storageReference = FirebaseStorage.instance.ref().child('seller_id_proof').child(user.uid);
+    StorageUploadTask uploadTask = storageReference.putFile(file);
+    await uploadTask.onComplete;
+    await storageReference.getDownloadURL().then((value) {
+      Firestore.instance.collection('sellers').document(user.uid).updateData({
+        'signature' : value.toString(),
+      });
+    });
+    // print('File Uploaded !' + idUrl);
+    key.currentState.showSnackBar(SnackBar(content: Text('Signature Uploaded Successfully !')));
+    setState(() {
+      uploading = false;
+      signatureVerified = true;
+      });
+    
+  } 
+
   _uploadWidget() {
     return GestureDetector(
       onTap: () async {
-        // file = await FilePicker.getFile();
-        final path = await FlutterDocumentPicker.openDocument();
-        print(path.toString() + "**********************************8");
+        uploadDoc();
+        // final path = await FlutterDocumentPicker.openDocument();
+        // print(path.toString() + "**********************************8");
       },
       child: Container(
         height: 110.0,
@@ -125,13 +161,13 @@ class _SignatureState extends State<Signature> {
 
   _signatureWidget() {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SignApp())),
+
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SignApp())),
+
       child: Container(
         height: 110.0,
         width: MediaQuery.of(context).size.width / 1.35,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
         alignment: Alignment.center,
         child: Text(
           'Click here to sign !',

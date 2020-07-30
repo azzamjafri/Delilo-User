@@ -254,6 +254,6 @@ class _EmailVerificationState extends State<EmailVerification> {
 
   logo() {
     return Container(
-        height: 160.0, width: 200.0, child: Image.asset('assets/dellologo.png'));
+        height: 120.0, width: 200.0, child: Image.asset('assets/dellologo.png'));
   }
 }

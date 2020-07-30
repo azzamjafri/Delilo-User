@@ -298,7 +298,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                       GestureDetector(
                         onTap: () async {
                           user = await AuthService().signInWithGoogle();
-                          print(user.uid + ' THIS IS THE UID OF CURRENT USER\n\n\n');
+                          // print(user.uid + ' THIS IS THE UID OF CURRENT USER\n\n\n');
                           await Firestore.instance
                             .collection('users')
                             .document(user.uid)
@@ -373,7 +373,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
 
   
-    Future<void> verifyPhone(phoneNo) async {
+  Future<void> verifyPhone(phoneNo) async {
     final PhoneVerificationCompleted verified =
         (AuthCredential authResult) async {
       // AuthService().signIn(authResult);
@@ -383,6 +383,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
             userNameController != null &&
             passwordController != null) {
           canRegister = true;
+          
         }
         await FirebaseAuth.instance.currentUser().then((value) {
           user = value;

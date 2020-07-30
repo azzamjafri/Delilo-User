@@ -2,6 +2,10 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delilo/models/auth_service.dart';
+import 'package:delilo/screens/seller/authenticate/selleregister.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -29,19 +33,17 @@ class SignAppState extends State<SignApp> {
     initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  
   initPlatformState() async {
     String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
+    
     try {
-      // platformVersion = await SimplePermissions.platformVersion;
+      
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
+    
     if (!mounted) return;
 
     setState(() {
@@ -64,9 +66,7 @@ class SignAppState extends State<SignApp> {
         FlatButton(
           child: Text('Save'),
           onPressed: () {
-            // Future will resolve later
-            // so setState @image here and access in #showImage
-            // to avoid @null Checks
+            
             setRenderedImage(context);
           },
         )
@@ -80,14 +80,45 @@ class SignAppState extends State<SignApp> {
     setState(() {
       image = renderedImage;
     });
-
+    uploadFile();
     showImage(context);
+  }
+
+  uploadFile() async {
+
+  
+
+    // var pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    
+    Directory directory = await getExternalStorageDirectory();
+    String path = directory.path;
+    await Directory('$path/$directoryName').create(recursive: true);
+    // File('$path/$directoryName/${formattedDate()}.png').writeAsBytesSync(pngBytes.buffer.asInt8List());
+    File file = await File('$path/$directoryName/${formattedDate()}.png');
+    
+    
+    print(file.path.toString() + '********************');
+    
+    
+    StorageReference storageReference = FirebaseStorage.instance.ref().child('seller_id_proof').child(user.uid);
+    StorageUploadTask uploadTask = storageReference.putFile(file);
+    await uploadTask.onComplete;
+    await storageReference.getDownloadURL().then((value) {
+
+      Firestore.instance.collection('sellers').document(user.uid).updateData({
+        'signature' : value.toString(),
+      });
+      signatureVerified = true;
+    });
+    
+    
+    // setState(() {uploading = false;});
+  
   }
 
   Future<Null> showImage(BuildContext context) async {
     var pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
-    // if (!(await checkPermission())) await requestPermission();
-    // Use plugin [path_provider] to export image to storage
+    
     Directory directory = await getExternalStorageDirectory();
     String path = directory.path;
     print(path);
@@ -129,20 +160,7 @@ class SignAppState extends State<SignApp> {
     return dateTimeString;
   }
 
-  // requestPermission() async {
-  //   var result = await SimplePermissions.requestPermission(_permission);
-  //   return result;
-  // }
 
-  // checkPermission() async {
-  //   bool result = await SimplePermissions.checkPermission(_permission);
-  //   return result;
-  // }
-
-  // getPermissionStatus() async {
-  //   final result = await SimplePermissions.getPermissionStatus(_permission);
-  //   print("permission status is " + result.toString());
-  // }
 }
 
 class Signature extends StatefulWidget {
@@ -155,17 +173,11 @@ class Signature extends StatefulWidget {
 }
 
 class SignatureState extends State<Signature> {
-  // [SignatureState] responsible for receives drag/touch events by draw/user
-  // @_points stores the path drawn which is passed to
-  // [SignaturePainter]#contructor to draw canvas
+  
   List<Offset> _points = <Offset>[];
 
   Future<ui.Image> get rendered {
-    // [CustomPainter] has its own @canvas to pass our
-    // [ui.PictureRecorder] object must be passed to [Canvas]#contructor
-    // to capture the Image. This way we can pass @recorder to [Canvas]#contructor
-    // using @painter[SignaturePainter] we can call [SignaturePainter]#paint
-    // with the our newly created @canvas
+    
     ui.PictureRecorder recorder = ui.PictureRecorder();
     Canvas canvas = Canvas(recorder);
     SignaturePainter painter = SignaturePainter(points: _points);
@@ -203,9 +215,7 @@ class SignatureState extends State<Signature> {
     );
   }
 
-  // clearPoints method used to reset the canvas
-  // method can be called using
-  //   key.currentState.clearPoints();
+  
   void clearPoints() {
     setState(() {
       _points.clear();
@@ -214,10 +224,7 @@ class SignatureState extends State<Signature> {
 }
 
 class SignaturePainter extends CustomPainter {
-  // [SignaturePainter] receives points through constructor
-  // @points holds the drawn path in the form (x,y) offset;
-  // This class responsible for drawing only
-  // It won't receive any drag/touch events by draw/user.
+  
   List<Offset> points = <Offset>[];
 
   SignaturePainter({this.points});

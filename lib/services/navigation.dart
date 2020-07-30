@@ -18,7 +18,10 @@ import 'package:delilo/screens/home/homepage.dart';
 import 'package:delilo/screens/home/orders.dart';
 import 'package:delilo/screens/home/paymentpage.dart';
 import 'package:delilo/screens/home/productdetailspage.dart';
-import 'package:delilo/screens/seller/authenticate/registration/gst_details.dart';
+import 'package:delilo/screens/seller/authenticate/registration/bank_details.dart';
+import 'package:delilo/screens/seller/authenticate/registration/business_details.dart';
+import 'package:delilo/screens/seller/authenticate/registration/email_verification.dart';
+import 'package:delilo/screens/seller/authenticate/registration/signature.dart';
 import 'package:delilo/screens/seller/authenticate/selleregister.dart';
 import 'package:delilo/screens/seller/authenticate/sellersignin.dart';
 import 'package:delilo/screens/seller/home/newproductpage.dart';
@@ -60,14 +63,15 @@ class NavigationHelper{
       case '/kidsfashioncategory' : return MaterialPageRoute(builder: (_) => KidsFashionCategory(args));
       case '/rateus' : return MaterialPageRoute(builder: (_) => RateUs());
 
+
+
       /* seller screens*/
       case '/sellerlogin':return MaterialPageRoute(builder: (_) => SellerSigninScreen());
       case '/sellersignup':return MaterialPageRoute(builder: (_) => SellerRegisterScreen());
-      case '/getgstdetails':return MaterialPageRoute(builder: (_) => Details());
-      // case '/getgstdetails':return MaterialPageRoute(builder: (_)=>GetGstDetails());
-      case '/getbankdetails':return MaterialPageRoute(builder: (_)=>GetBankDetails());
-      case '/getsign':return MaterialPageRoute(builder: (_)=>CollectSignPage());
-      case '/verificationpage':return MaterialPageRoute(builder: (_)=>SellerVerificationPage());
+      case '/getbusinessdetails':return MaterialPageRoute(builder: (_) => BusinessDetails());
+      case '/getbankdetails':return MaterialPageRoute(builder: (_) => BankDetails());
+      case '/getsign':return MaterialPageRoute(builder: (_) => Signature());
+      case '/verificationpage':return MaterialPageRoute(builder: (_) => EmailVerification());
       case '/sellerhome':return MaterialPageRoute(builder: (_)=>SellerHomeScreen());
       case '/categorylisting':return MaterialPageRoute(builder: (_)=>SellerCategoryListing());
       case '/addproductpage':return MaterialPageRoute(builder: (_)=>NewProductPage());
