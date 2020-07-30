@@ -1,3 +1,4 @@
+import 'package:delilo/screens/seller/authenticate/selleregister.dart';
 import 'package:flutter/material.dart';
 
 
@@ -8,6 +9,23 @@ class EmailVerification extends StatefulWidget {
 
 class _EmailVerificationState extends State<EmailVerification> {
   bool check = true;
+  double verify = 0.0;
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    if(phoneVerified) verify += 0.14285;
+    if(emailVerified) verify += 0.14285;
+    else verify += 0.07112;
+    if(gstVerified) verify += 0.14285;
+    if(signatureVerified) verify += 0.14285;
+    if(bankAccountVerified) verify += 0.14285;
+    if(cancelChequeVerified) verify += 0.14285;
+    
+
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -74,7 +92,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                       child: LinearProgressIndicator(
                         backgroundColor: Colors.grey[200],
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                        value: 0.8,
+                        value: verify,
                       ),
                     ),
                   ),
@@ -90,39 +108,48 @@ class _EmailVerificationState extends State<EmailVerification> {
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20.0,
-                  top: 10.0,
+                  
                 ),
-                child: twoCheckRows('Email Verification', 'Phone Verification'),
+                
+                child: twoCheckRows('Email Verification', emailVerified),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.only(left: 20.0, ),
+                child: twoCheckRows('Phone Verification', phoneVerified),
+              ),
+              Padding(
+                padding: EdgeInsets.all(6.0),
               ),
               Text(
                 'Business Details',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  top: 10.0,
-                ),
-                child: twoCheckRows('GSTIN', 'Signature Verification'),
+                padding: const EdgeInsets.only(left: 20.0, ),
+                child: twoCheckRows('GSTIN', gstVerified),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.only(left: 20.0, ),
+                child: twoCheckRows('Signature Verification', signatureVerified),
+              ),
+              
+              Padding(
+                padding: EdgeInsets.all(6.0),
               ),
               Text(
                 'Bank Account Details',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  top: 10.0,
-                ),
-                child: twoCheckRows(
-                    'Bank Account Verification', 'Cancelled Cheque'),
+                padding: const EdgeInsets.only(left: 20.0, ),
+                child: twoCheckRows('Bank Account Verification', bankAccountVerified),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, ),
+                child: checkRow('Cancelled Cheque'),
+              ),
+              
               Padding(
                 padding: EdgeInsets.all(10.0),
               ),
@@ -135,26 +162,31 @@ class _EmailVerificationState extends State<EmailVerification> {
                   left: 20.0,
                   top: 10.0,
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 15.0,
-                      width: 15.0,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                    ),
-                    Text('Listing Created'),
-                  ],
-                ),
+                child: checkRow('Listing Created'),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  checkRow(String param) {
+    return Row(
+            children: [
+              Padding(padding: EdgeInsets.only(left: 5.0)),
+              Container(
+                height: 11.5,
+                width: 11.5,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 20.0, left: 10.0),
+              ),
+              Text('$param'),
+            ],
+          );
   }
 
   continueButton() {
@@ -174,40 +206,19 @@ class _EmailVerificationState extends State<EmailVerification> {
     );
   }
 
-  twoCheckRows(String v1, String v2) {
-    return Column(
+  twoCheckRows(String v1, bool verified) {
+    return Row(
       children: [
-        Row(
-          children: [
-            Container(
-              height: 15.0,
-              width: 15.0,
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 20.0),
-            ),
-            Text('$v1'),
-          ],
+        Container(
+          height: 30.0,
+          width: 25.0,
+          // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+          child: (verified) ? Image.asset('assets/greentick.png') : Image.asset('assets/yellowtick.png'),
         ),
         Padding(
-          padding: EdgeInsets.all(2.0),
+          padding: EdgeInsets.only(right: 20.0),
         ),
-        Row(
-          children: [
-            Container(
-              height: 15.0,
-              width: 15.0,
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 20.0),
-            ),
-            Text('$v2'),
-          ],
-        ),
+        Text('$v1'),
       ],
     );
   }
