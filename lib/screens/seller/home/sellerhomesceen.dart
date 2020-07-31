@@ -61,7 +61,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text("Fashion",style: TextStyle(color: Colors.green),),
+                            Text("Fashion",style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
                             Text("122 Items"),
                           ],
                         ),
@@ -183,6 +183,8 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
                   ],
                 ),
               ),
+
+              SizedBox(height: 20.0),
 
             ],
           ),

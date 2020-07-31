@@ -15,6 +15,7 @@ class _SellerDrawerState extends State<SellerDrawer> {
   @override
   void initState() {
     super.initState();
+    print(user.uid + '*******************************');
     Firestore.instance.collection('seller').document(user.uid).get().then((value) {
       name = value.data['name'];
     });

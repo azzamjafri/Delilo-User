@@ -378,9 +378,12 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
 
 
   Future<void> verifyPhone(phoneNo) async {
+
+    
+
     final PhoneVerificationCompleted verified =
         (AuthCredential authResult) async {
-      // AuthService().signIn(authResult);
+      
       FirebaseAuth.instance.signInWithCredential(authResult).then((usser) async {
         if (emailController != null &&
             phoneController != null &&
@@ -397,6 +400,7 @@ class _SellerRegisterScreenState extends State<SellerRegisterScreen> {
         this.verified = true;
         this.loginKey = authResult;
         otpController.text = smsCode;
+        AuthService().signUpWithEmail(emailController.text.trim(), 'test1234');
       });
     };
 
